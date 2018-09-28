@@ -41,11 +41,7 @@
 		{!! Form::close() !!}
 
 
-		{!! Form::open(['method'=>'DELETE' , 'action' => ['AdminPostsController@destroy' , $post->id] ]) !!}
-
-		{!! Form::submit('Delete', ['class'=>'btn btn-danger col-sm-6']) !!}
-
-		{!! Form::close() !!}
+	
 	</div>
 
 </div>

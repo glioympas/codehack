@@ -13,7 +13,7 @@
 
 
 
-
+<div id="postsTable">
 	<table class="table">
 		<thead>
 			<tr>
@@ -26,6 +26,7 @@
 				<th>Created</th>
 				<th>Updated</th>
 				<th>Edit</th>
+				<th>Delete</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -43,7 +44,14 @@
 						<td>{{ str_limit($post->body,7) }}</td>
 						<td>{{ $post->created_at->diffForHumans() }}</td>
 						<td>{{ $post->updated_at->diffForHumans() }}</td>
-						<th> <a href="{{ route('admin.posts.edit' , $post->id) }}"> Edit </a></th>
+						<th> <a class="btn btn-warning" href="{{ route('admin.posts.edit' , $post->id) }}"> Edit </a></th>
+						<th>
+								{!! Form::open(['method'=>'DELETE' , 'action' => ['AdminPostsController@destroy' , $post->id], 'class' => 'deletePost' ]) !!}
+
+								{!! Form::submit('Delete', ['class'=>'btn btn-danger']) !!}
+
+								{!! Form::close() !!}
+						</th>
 					</tr>
 
 
@@ -55,7 +63,7 @@
 		</tbody>
 	</table>
 
-
+</div>
 
 
 @endsection

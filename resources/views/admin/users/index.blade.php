@@ -40,7 +40,7 @@
         	  	 <td> {!! $user->is_active == 1 ? '<font color="green">Active</font>' : '<font color="red">No Active</font>' !!} </td>
         	  	 <td> @if($user->created_at)  {{ $user->created_at->diffForHumans()}}    @endif </td>
         	  	 <td> @if($user->updated_at)  {{ $user->updated_at->diffForHumans()}}    @endif</td>
-        	  	 <td> <a href="{{ route('admin.users.edit', $user->id) }}">Edit</a> </td>
+        	  	 <td> <a class="btn btn-warning" href="{{ route('admin.users.edit', $user->id) }}">Edit</a> </td>
                <th> 
                   {!! Form::open(['method'=>'DELETE', 'action'=> ['AdminUsersController@destroy' , $user->id ], 'class'=>'deleteUser' ]) !!}
 

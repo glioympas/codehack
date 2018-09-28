@@ -134,8 +134,10 @@ class AdminPostsController extends Controller
             $post->photo()->delete();    //delete the photo from the database
         }
         $post->delete(); // delete the post
-        Session::flash('post_deleted' , 'Post deleted successfully.');
-        return redirect('/admin/posts');
+        return ['deleted'=>'Post deleted successfully.'];
+
+        // Session::flash('post_deleted' , 'Post deleted successfully.');
+        // return redirect('/admin/posts');
 
     }
 }

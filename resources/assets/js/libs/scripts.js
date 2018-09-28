@@ -1,6 +1,17 @@
-/**
- * Created by edwin on 11/7/15.
- */
+function ajaxForm(form , successFunc , errorFunc)
+{
+    $.ajax({
+         type: form.attr('method'),
+         url: form.attr('action'),
+         data: form.serialize(),
+         success: function(data){
+            successFunc(data);
+         },
+         error: function(error){
+            errorFunc(error);
+         } 
+    });
+}
 
 $(document).ready(function(){
 
@@ -11,24 +22,38 @@ $(document).ready(function(){
         e.preventDefault();
         var form = $(this);
 
-        $.ajax({
-            type: form.attr('method'),
-            url: form.attr('action'),
-            data: form.serialize(),
-            success:
-            function(data)
-            {
+        if(confirm('Are you sure?'))
+        {
+           ajaxForm(form, function(data){
                 if(data.deleted)
                     $('#usersTable').load(location.href + ' #usersTable');
-            }
+                
+           } , function(error){});
 
-        });
-
+        }
 
     });
 
 
 
+    /*
+        Delete Post Ajax
+    */
+
+    $('.deletePost').on('submit', function(e){
+        e.preventDefault();
+        var form = $(this);
+
+        if(confirm('Are you sure?'))
+        {
+            ajaxForm(form, function(data){
+
+                if(data.deleted)
+                     $('#postsTable').load(location.href + ' #postsTable');
+
+            } , function(error){});
+        }
+    });
 
 
 
