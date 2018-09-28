@@ -2541,6 +2541,24 @@ $(document).ready(function(){
         }
     });
 
+    /*
+        Delete Category Ajax
+    */
+    $('.deleteCategory').on('submit' , function(e){
+        e.preventDefault();
+        var form = $(this);
+
+        if(confirm('Are you sure?'))
+        {
+            ajaxForm(form, function(data){
+                if(data.deleted)
+                    $('#categoriesTable').load(location.href + ' #categoriesTable');
+            }
+            , function(error){
+                console.log(error);
+            });
+        }
+    });
 
 
 
