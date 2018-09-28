@@ -9,6 +9,7 @@ It's simple but it covers many core functionalities of Laravel.
 -Middlewares for access restrictions.<br />
 -Requests to handle form validations with custom messages.<br />
 -Model relation functions.<br />
+-Model accessors and mutators for easy retrieving/saving data from/to DB.
 -Foreign Keys to delete a row of a table that it's based on another table.<br />
 <br /><br />
 And some more functionalities are represented in the code.
