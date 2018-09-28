@@ -11,7 +11,6 @@ It's simple but it covers many core functionalities of Laravel.
 -Model relation functions.<br />
 -Model accessors and mutators for easy retrieving/saving data from/to DB.<br />
 -Foreign Keys to delete a row of a table that it's based on another table.<br />
-<br />
 -AJAX http requests to server to avoid refreshing page using jQuery.
 <br /><br />
 And some more functionalities are represented in the code.
