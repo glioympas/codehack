@@ -2490,6 +2490,36 @@ $(function() {
 
 $(document).ready(function(){
 
+    /*
+        Delete User Ajax
+    */
+    $('.deleteUser').on('submit', function(e){
+        e.preventDefault();
+        var form = $(this);
+
+        $.ajax({
+            type: form.attr('method'),
+            url: form.attr('action'),
+            data: form.serialize(),
+            success:
+            function(data)
+            {
+                if(data.deleted)
+                    $('#usersTable').load(location.href + ' #usersTable');
+            }
+
+        });
+
+
+    });
+
+
+
+
+
+
+
+
     $('#selectAllBoxes').click(function(event){
 
         if(this.checked) {

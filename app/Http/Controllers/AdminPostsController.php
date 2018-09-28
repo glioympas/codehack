@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Requests\PostsCreateRequest;
+use App\Http\Requests\PostsEditRequest;
 
 use Illuminate\Support\Facades\Auth;
-
-
+use Illuminate\Support\Facades\Session;
 
 use App\Category;
 use App\Post;
@@ -59,8 +59,8 @@ class AdminPostsController extends Controller
             $data['photo_id'] = $photo->id;
         }   
 
-        $post = Post::create($data);
-        $user->posts()->save($post);
+   
+        $user->posts()->create($data);
 
         return redirect('/admin/posts');
     }
@@ -84,7 +84,9 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $categories = Category::lists('name','id')->all();
+        return view('admin.posts.edit' , compact('post','categories'));
     }
 
     /**
@@ -94,9 +96,24 @@ class AdminPostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostsEditRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        // $post = Post::findOrFail($id);
+
+        if($file = $request->file('photo_id'))
+        {
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images',$name);
+            $photo = Photo::create(['file'=>$name]);
+            $data['photo_id'] = $photo->id;
+        }
+        Auth::user()->posts()->whereId($id)->first()->update($data);
+        // $post->update($data);
+        Session::flash('post_updated', 'Post updated successfully.');
+        return redirect('/admin/posts');
+
+
     }
 
     /**
@@ -107,6 +124,18 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        if($post->photo)
+        {
+            if(file_exists(public_path() . $post->photo->file))
+                @unlink(public_path() . $post->photo->file );//delete the post's photo
+            
+            $post->photo()->delete();    //delete the photo from the database
+        }
+        $post->delete(); // delete the post
+        Session::flash('post_deleted' , 'Post deleted successfully.');
+        return redirect('/admin/posts');
+
     }
 }

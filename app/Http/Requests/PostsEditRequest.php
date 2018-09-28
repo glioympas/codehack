@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class PostsCreateRequest extends Request
+class PostsEditRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +23,12 @@ class PostsCreateRequest extends Request
      */
     public function rules()
     {
-        return [
+         return [
             'title' => 'required',
             'body' => 'required',
             
             'category_id' => 'required',
-            'photo_id' => 'required',
+          
         ];
     }
 
@@ -37,9 +37,8 @@ class PostsCreateRequest extends Request
         return [
             'title.required' => "Title field can't be empty.",
             'category_id.required' => "Category field can't be empty.",
-            'photo_id.required' => "Photo can't be empty.",
+            
             'body.required' => "Post's body can't be empty.",
         ];
     }
-
 }
