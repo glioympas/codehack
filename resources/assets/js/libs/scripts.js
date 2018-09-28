@@ -1,5 +1,8 @@
-function ajaxForm(form , successFunc , errorFunc)
-{
+
+$(document).ready(function(){
+
+    function ajaxForm(form , successFunc , errorFunc)
+    {
     $.ajax({
          type: form.attr('method'),
          url: form.attr('action'),
@@ -12,8 +15,6 @@ function ajaxForm(form , successFunc , errorFunc)
          } 
     });
 }
-
-$(document).ready(function(){
 
     /*
         Delete User Ajax
@@ -71,6 +72,26 @@ $(document).ready(function(){
             , function(error){
                 console.log(error);
             });
+        }
+    });
+
+    /*
+        Delete Media Ajax
+    */
+    $('.deleteMedia').on('submit', function(e){
+        e.preventDefault();
+        var form = $(this);
+
+        if(confirm('Are you sure?'))
+        {
+            ajaxForm(form , function(data){
+                if(data.deleted)
+                    $('#mediaTable').load(location.href + ' #mediaTable');
+                else if(data.notdeleted)
+                    alert(data.notdeleted);
+            }, 
+            function(error)
+            {console.log(error)} );
         }
     });
 
