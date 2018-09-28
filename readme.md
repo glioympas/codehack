@@ -3,12 +3,12 @@
 It's simple but it covers many core functionalities of Laravel. 
 
 -Routing with resource option for optimal CRUD functions.<br />
--Authentication.
--Eloquent relations. One to One | One to Many.
--Files uploading manually and with dropzonejs plugin.
--Middlewares for access restrictions.
--Requests to handle form validations with custom messages.
--Model relation functions.
--Foreign Keys to delete a row of a table that it's based on another table.
-
+-Authentication.<br />
+-Eloquent relations. One to One | One to Many.<br />
+-Files uploading manually and with dropzonejs plugin.<br />
+-Middlewares for access restrictions.<br />
+-Requests to handle form validations with custom messages.<br />
+-Model relation functions.<br />
+-Foreign Keys to delete a row of a table that it's based on another table.<br />
+<br /><br />
 And some more functionalities are represented in the code.
